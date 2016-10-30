@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<h2>Course list</h2>
+{% endblock %}
+
+{% block content %}
+{% if course_list %}
+<div class="row">
+    {% for course in course_list %}
+    <div class="col-xs-6 col-lg-4">
+        <h4><a href="{% url 'reviews:course_detail' course.id %}">
+        {{ course.name }}
+        </a></h4>
+        <h5>{{ course.review_set.count }} reviews</h5>
+        <h5>{{ course.average_rating | floatformat }} average rating</h5>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+    <p>No courses are available.</p>
+{% endif %}
+{% endblock %}
