@@ -3,7 +3,7 @@
 
 {% block title %}
 <h2>{{ course.name }}</h2>
-<h5>{{ course.review_set.count }} reviews ({{ course.average_rating | floatformat }} average rating)</h5>
+<h5>{{ course.review_set.count }} reviews (average rating)</h5>
 {% endblock %}
 
 {% block content %}
@@ -14,7 +14,7 @@
     {% for review in course.review_set.all %}
     <div class="col-xs-6 col-lg-4">
         <em>{{ review.comment }}</em>
-        <h6>Rated {{ review.rating }} of 5 by <a href="{% url 'reviews:user_review_list' review.user_name %}" >{{ review.user_name }}</a></h6>
+        <h6>Rated {{ review.rating }} of 5 by <a href="{% url 'reviews:review_detail' review.id %}" >{{ review.user_name }}</a></h6>
         <h5><a href="{% url 'reviews:review_detail' review.id %}">
         Read more
         </a></h5>
@@ -30,7 +30,9 @@
 
 <form action="{% url 'reviews:add_review' course.id %}" method="post" class="form">
     {% csrf_token %}
-    {% bootstrap_form form layout='inline' %}
+        {% for field in form %}
+            {% bootstrap_field field%}
+        {% endfor%}
     {% buttons %}
     <button type="submit" class="btn btn-primary">
       {% bootstrap_icon "star" %} Add

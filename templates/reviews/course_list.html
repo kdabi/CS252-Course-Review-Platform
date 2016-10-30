@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<h2>Course list</h2>
+<h3>Course list</h3>
 {% endblock %}
 
 {% block content %}
@@ -10,10 +10,9 @@
     {% for course in course_list %}
     <div class="col-xs-6 col-lg-4">
         <h4><a href="{% url 'reviews:course_detail' course.id %}">
-        {{ course.name }}
+        {{ course.course_id }}: {{course.course_name}}
         </a></h4>
         <h5>{{ course.review_set.count }} reviews</h5>
-        <h5>{{ course.average_rating | floatformat }} average rating</h5>
     </div>
     {% endfor %}
 </div>

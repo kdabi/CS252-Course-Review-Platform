@@ -2,7 +2,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<h2>Latest reviews</h2>
+<h3>Latest reviews</h3>
 {% endblock %}
 
 {% block content %}
@@ -13,7 +13,7 @@
         <h4><a href="{% url 'reviews:review_detail' review.id %}">
         {{ review.course.course_id }}
         </a></h4>
-        <h6>Rated {{ review.rating }} of 5 </h6>
+        <h6>Rated {{ review.rating }} of 5 by {{ review.user_name }}</h6>
         <p>{{ review.comment }}</p>
     </div>
     {% endfor %}

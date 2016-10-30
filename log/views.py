@@ -27,7 +27,7 @@ def review_detail(request, review_id):
     return render(request, 'reviews/review_detail.html', {'review': review})
 
 def course_list(request):
-    course_list = Course.objects.order_by('-name')
+    course_list = Course.objects.order_by('-course_id')
     context = {'course_list':course_list}
     return render(request, 'reviews/course_list.html', context)
 
@@ -36,8 +36,11 @@ def course_detail(request, course_id):
     return render(request, 'reviews/course_detail.html', {'course': course})
 
 def add_review(request, course_id):
-    course = get_object_or_404(Course, pk=wine_id)
-    form = ReviewForm(request.POST)
+    course = get_object_or_404(Course, pk=course_id)
+    if request.POST:
+        form = ReviewForm(request.POST)
+    else:
+        form = ReviewForm()
     if form.is_valid():
         rating = form.cleaned_data['rating']
         comment = form.cleaned_data['comment']
