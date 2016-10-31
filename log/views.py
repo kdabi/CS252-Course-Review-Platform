@@ -1,9 +1,10 @@
 #!python
 #log/views.py
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, render_to_response
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
+from pexpect import pxssh
 
 from .models import Review, Course
 from .forms import ReviewForm
@@ -13,9 +14,27 @@ import datetime
 # Create your views here.
 # this login required decorator is to not allow to any  
 # view without authenticating
+def login(request):
+    c={}
+    c.update(csrf(request))
+    return render_to_response('login.html',c)
+
+def auth_view(request):
+    username = request.POST.get('username','')
+    password = request.POST.get('password','')
+    s = pxssh.pxssh()
+    try:
+        if s.login ('vyom.cc.iitk.ac.in', username, psswd):
+            user = User.objects.create_user(username, password='password')
+            # auth.login(request, user)
+            return HttpResponseRedirect('home.html')
+    except:
+        return HttpResponseRedirect('home.html')
+
+
 @login_required(login_url="login/")
 def home(request):
-	return render(request,"home.html")
+    return render(request,"home.html")
 
 @login_required(login_url="/login/")
 def review_list(request):
