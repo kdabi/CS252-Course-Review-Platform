@@ -14,7 +14,8 @@ class Course(models.Model):
 #    review = models.ForeignKey(Review, on_delete=models.CASCADE)
 
     def average_rating(self):
-        all_ratings = map(lambda x: float(x.rating), self.review_set.all())
+#        all_ratings = map(lambda x: float(x.rating), self.review_set.all())
+        all_ratings = [float(x.rating) for x in self.review_set.all()]
         return np.mean(all_ratings)
 
     def __str__(self):

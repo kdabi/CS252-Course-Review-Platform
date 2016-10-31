@@ -2,8 +2,8 @@
 {% load bootstrap3 %}
 
 {% block title %}
-<h2>{{ course.name }}</h2>
-<h5>{{ course.review_set.count }} reviews (average rating)</h5>
+<h2>{{course.course_id}}: {{ course.course_name }}</h2>
+<h5>{{ course.review_set.count }} reviews ({{course.average_rating }} average rating)</h5>
 {% endblock %}
 
 {% block content %}
