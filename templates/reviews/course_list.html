@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<h3>Course list</h3>
+{% endblock %}
+
+{% block content %}
+{% if course_list %}
+<div class="row">
+    {% for course in course_list %}
+    <div class="col-xs-6 col-lg-4">
+        <h4><a href="{% url 'reviews:course_detail' course.id %}">
+        {{ course.course_id }}: {{course.course_name}}
+        </a></h4>
+        <h5>{{ course.review_set.count }} reviews</h5>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+    <p>No courses are available.</p>
+{% endif %}
+{% endblock %}
