@@ -7,13 +7,15 @@
 {% endblock %}
 
 {% block content %}
+<h3>Course Details:</h3>
+<p>{{course.course_details}}</p>
 <h3>Recent reviews</h3>
 
 {% if course.review_set.all %}
 <div class="row">
     {% for review in course.review_set.all %}
     <div class="col-xs-6 col-lg-4">
-        <em>{{ review.comment }}</em>
+        <em>{{ review.summary }}</em>
         <h6>Rated {{ review.rating }} of 5 by <a href="{% url 'reviews:review_detail' review.id %}" >{{ review.user_name }}</a></h6>
         <h5><a href="{% url 'reviews:review_detail' review.id %}">
         Read more

@@ -49,6 +49,7 @@ def add_review(request, course_id):
     if form.is_valid():
         rating = form.cleaned_data['rating']
         comment = form.cleaned_data['comment']
+        summary = form.cleaned_data['summary']
 #        user_name = form.cleaned_data['user_name']
         user_name = request.user.username
         review = Review()
@@ -56,6 +57,7 @@ def add_review(request, course_id):
         review.user_name = user_name
         review.rating = rating
         review.comment = comment
+        review.summary = summary
         review.pub_date = datetime.datetime.now()
         review.save()
         # Always return an HttpResponseRedirect after successfully dealing
