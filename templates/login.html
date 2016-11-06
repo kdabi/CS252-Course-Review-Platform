@@ -22,7 +22,7 @@ please login with an account that has access.</p>
           <h3 class="panel-title">Please Sign In</h3>
         </div>
         <div class="panel-body">
-          <form method="post" action="{% url 'login' %}">
+          <form method="post" action="{% url 'auth' %}">
             {% csrf_token %}
             <p class="bs-component">
             <table>
@@ -36,7 +36,7 @@ please login with an account that has access.</p>
               </tr>
             </table>
             </p>
-            <p class="bs-component">
+            <p class="bs-component">  
             <center><input class="btn btn-success btn-sm" type="submit" value="login" /></center>
             </p>
             <input type="hidden" name="next" value="{{ next }}" />
