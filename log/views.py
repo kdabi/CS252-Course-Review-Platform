@@ -10,7 +10,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 from pexpect import pxssh
 from django import forms
-from graphos.sources.model import ModelDataSource
 
 from .models import Review, Course
 from .forms import ReviewForm
