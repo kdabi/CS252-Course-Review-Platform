@@ -3,7 +3,8 @@
 
 {% block title %}
 <h2>{{course.course_id}}: {{ course.course_name }}</h2>
-<h5>{{ course.review_set.count }} reviews ({{course.average_rating }} average rating)</h5>
+<h5>{{ course.review_set.count }} reviews</h5>
+<h5>({{course.average_rating }} average rating)</h5>
 {% endblock %}
 
 {% block content %}
@@ -31,6 +32,7 @@
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
 <form action="{% url 'reviews:add_review' course.id %}" method="post" class="form">
+
     {% csrf_token %}
         {% for field in form %}
             {% bootstrap_field field%}

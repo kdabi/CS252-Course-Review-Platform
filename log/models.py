@@ -5,12 +5,15 @@ from django.db import models
 from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 
+#from ratings.handlers import ratings
+
 # Create your models here.
 class Course(models.Model):
-    course_id = models.CharField(max_length=20)
-    course_name = models.CharField(max_length=200)
-    course_preReq = models.CharField(max_length=100, null=True)
-    course_details = models.TextField(null=True)
+    course_id = models.CharField(max_length=10, null=True)
+    course_name = models.CharField(max_length=1000, null=True)
+    course_preReq = models.CharField(max_length=1000, default='None')
+    course_details = models.TextField(default='Not yet decided')
+    course_credit = models.CharField(max_length=100, null=True)
 #    review = models.ForeignKey(Review, on_delete=models.CASCADE)
 
     def average_rating(self):
@@ -33,7 +36,9 @@ class Review(models.Model):
     pub_date = models.DateTimeField('date published')
     user_name = models.CharField(max_length=100)
     comment = models.TextField(null=True)
+    summary = models.CharField(max_length=100, default='Summary')
     rating = models.IntegerField(choices=RATING_CHOICES)
+#    rating = models.ForeignKey('star_ratings.Rating')
 #    pub_date = models.DateTimeField('date published')
 
     def was_published_recently(self):
@@ -47,4 +52,4 @@ class Review(models.Model):
 #class Deadline(models.Model):
  #   course = models.ForeignKey(Course, on_delete=models.CASCADE)
 
-
+#ratings.register(Course)
