@@ -8,8 +8,14 @@
 {% endblock %}
 
 {% block content %}
+<h3>Course Credits:</h3>
+<p>{{course.course_credit}}</p>
+<h3>Course Pre-requisites:</h3>
+<p>{{course.course_preReq}}</p>
 <h3>Course Details:</h3>
-<p>{{course.course_details}}</p>
+<p> {% autoescape on %}
+    {{ course.course_details | linebreaksbr }}
+{% endautoescape %}</p>
 <h3>Recent reviews</h3>
 
 {% if course.review_set.all %}

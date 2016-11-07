@@ -12,7 +12,7 @@ class LoginForm(AuthenticationForm):
 class ReviewForm(ModelForm):
     class Meta:
         model = Review
-        fields = ['rating', 'comment', 'summary']#['user_name', 'rating', 'comment']
+        fields = ['rating', 'comment','summary']#['user_name', 'rating', 'comment']
         widgets = {
             'comment': Textarea(attrs={'cols': 50, 'rows': 10})
         }
