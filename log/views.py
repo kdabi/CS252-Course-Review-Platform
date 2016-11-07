@@ -1,21 +1,56 @@
 #!python
 #log/views.py
-from django.shortcuts import get_object_or_404, render
+import sys
+from django.shortcuts import get_object_or_404, render, render_to_response
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login
+from pexpect import pxssh
+from django import forms
 
 from .models import Review, Course
 from .forms import ReviewForm
+from .forms import LoginForm
 
 import datetime
 
 # Create your views here.
 # this login required decorator is to not allow to any  
 # view without authenticating
+
+def user_login(request):
+    username = request.POST.get('username',None)
+    psswd = request.POST.get('password',None)
+    s = pxssh.pxssh()
+
+    try:
+        ## trying doing ssh 
+        if s.login ('vyom.cc.iitk.ac.in', username, psswd):
+            s.logout()
+            print ("Logged Out")
+            if username :
+                user, created = User.objects.get_or_create(username=username)
+                user.set_password('123')
+                user.save()
+                if created:
+                    user.set_password('123')
+                    user.save()
+            user = authenticate(username=username, password='123')
+            login(request, user)
+            latest_review_list = Review.objects.order_by('-pub_date')[:9]
+            context = {'latest_review_list':latest_review_list}
+            return render(request, 'reviews/review_list.html', context)
+    except:
+        ## error if the user is not valid
+        return render(request, 'login.html')
+
+
 @login_required(login_url="login/")
 def home(request):
-	return render(request,"home.html")
+    return render(request,"home.html")
 
 @login_required(login_url="/login/")
 def review_list(request):
