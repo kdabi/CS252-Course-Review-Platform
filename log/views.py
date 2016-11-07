@@ -40,12 +40,12 @@ def user_login(request):
                     user.save()
             user = authenticate(username=username, password='123')
             login(request, user)
-            latest_review_list = Review.objects.order_by('-pub_date')[:9]
-            context = {'latest_review_list':latest_review_list}
-            return render(request, 'reviews/review_list.html', context)
+            return render(request,"home.html")
     except:
         ## error if the user is not valid
-        return render(request, 'login.html')
+        # return render( 'login.html')
+        return HttpResponseRedirect('/login/')
+        # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required(login_url="login/")
