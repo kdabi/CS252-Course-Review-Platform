@@ -65,7 +65,7 @@ def review_detail(request, review_id):
 
 @login_required(login_url="/login/")
 def course_list(request):
-    course_list = Course.objects.order_by('-course_id')
+    course_list = Course.objects.order_by('course_id')
     context = {'course_list':course_list}
     return render(request, 'reviews/course_list.html', context)
 
