@@ -23,7 +23,7 @@
     {% for review in course.review_set.all %}
     <div class="col-xs-6 col-lg-4">
         <em>{{ review.summary }}</em>
-        <h6>Rated {{ review.rating }} of 5 by <a href="{% url 'reviews:review_detail' review.id %}" >{{ review.user_name }}</a></h6>
+        <h6>Rated {{ review.rating }} of 5 by <a href="{% url 'user_detail' review.user_name %}" >{{ review.user_name }}</a></h6>
         <h5><a href="{% url 'reviews:review_detail' review.id %}">
         Read more
         </a></h5>
