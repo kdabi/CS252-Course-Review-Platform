@@ -11,7 +11,7 @@ from django.contrib.auth import authenticate, login
 from pexpect import pxssh
 from django import forms
 
-from .models import Review, Course
+from .models import Review, Course, Faculty
 from .forms import ReviewForm
 from .forms import LoginForm
 
@@ -76,6 +76,12 @@ def course_list(request):
     course_list = Course.objects.order_by('course_id')
     context = {'course_list':course_list}
     return render(request, 'reviews/course_list.html', context)
+
+@login_required(login_url="/login/")
+def faculty_list(request):
+    faculty_list = Faculty.objects.order_by('fac_name')
+    context = {'faculty_list':faculty_list}
+    return render(request, 'reviews/faculty_list.html', context)
 
 @login_required(login_url="/login/")
 def course_detail(request, course_id):

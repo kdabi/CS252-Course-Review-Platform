@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<h3>Faculty list</h3>
+{% endblock %}
+
+{% block content %}
+{% if faculty_list %}
+<form id="search">
+<select id="org" name="faculty_list" onChange="window.document.location.href=this.options[this.selectedIndex].value;">
+ <option  value="" selected="selected">---Search for Professors---</option>
+{% for faculty in faculty_list %}
+   <option value= {{faculty.fac_webpage}}
+       {% if faculty == current_faculty %}selected="selected"{% endif %}>
+       <h4><a href={{faculty.fac_webpage}}>
+        {{ faculty.fac_name }}
+        </a></h4>
+   </option>
+{% endfor %}
+</select>
+</form>
+<div class="row">
+    {% for faculty in faculty_list %}
+    <div class="col-xs-6 col-lg-4">
+        <h4><a href= {{faculty.fac_webpage}} >
+        {{ faculty.fac_name }}
+        </a></h4>
+        <h5>{{ faculty.fac_id }}: {{faculty.fac_data }}</h5>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+    <p>No faculties are available.</p>
+{% endif %}
+{% endblock %}
