@@ -20,6 +20,8 @@ import datetime
 # Create your views here.
 # this login required decorator is to not allow to any  
 # view without authenticating
+def homepage(request):
+    return render(request,"homepage.html")
 
 def user_login(request):
     username = request.POST.get('username',None)
