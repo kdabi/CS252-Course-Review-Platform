@@ -64,7 +64,8 @@ def review_list(request):
 @login_required(login_url="/login/")
 def review_detail(request, review_id):
     review = get_object_or_404(Review, pk=review_id)
-    return render(request, 'reviews/review_detail.html', {'review': review})
+    course = review.course#get_object_or_404(Course, pk=review.course.course__id)
+    return render(request, 'reviews/review_detail.html', {'review': review, 'course': course})
 
 @login_required(login_url="/login/")
 def course_list(request):
@@ -89,6 +90,12 @@ def add_review(request, course_id):
         comment = form.cleaned_data['comment']
         summary = form.cleaned_data['summary']
 #        user_name = form.cleaned_data['user_name']
+    #    course.ratings.rate(course, rating, user_name)
+#        course.ratings.objects.total += rating
+ #       course.ratings.count += 1
+  #      if course.ratings.average != 0:
+   #         course.ratings.average = course.ratings.total/course.ratings.average
+
         user_name = request.user.username
         review = Review()
         review.course = course
@@ -97,6 +104,7 @@ def add_review(request, course_id):
         review.comment = comment
         review.summary = summary
         review.pub_date = datetime.datetime.now()
+        course.ratings.rate(course, rating, request.user)#, user_name)
         review.save()
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a

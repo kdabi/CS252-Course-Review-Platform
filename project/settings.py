@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'bootstrap3',
     'log',
     'import_export',
+    'star_ratings',
 ]
 
 MIDDLEWARE_CLASSES = [

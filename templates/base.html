@@ -1,5 +1,6 @@
 
 	{% load staticfiles %}
+    {% load static %}
 
 	<!DOCTYPE html>
 	<html>
@@ -60,6 +61,9 @@
                 {% endblock %}
 	            {% block content %}
 	            {% endblock %}
+
+<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
 
 	    <!-- Core Scripts - Include with every page -->
 	    <script src = "{% static 'js/jquery.min.js' %}"></script>

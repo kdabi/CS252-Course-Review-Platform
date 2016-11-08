@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
 {% load bootstrap3 %}
+{% load ratings %}
+{% load avg_ratings %}
 
 {% block title %}
 <h2>{{course.course_id}}: {{ course.course_name }}</h2>
+{% avg_ratings course %}
 <h5>{{ course.review_set.count }} reviews</h5>
-<h5>({{course.average_rating }} average rating)</h5>
+
+
 {% endblock %}
 
 {% block content %}
@@ -33,6 +37,8 @@
 {% else %}
 <p>No reviews for this course yet</p>
 {% endif %}
+
+
 
 <h3>Add your review</h3>
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
