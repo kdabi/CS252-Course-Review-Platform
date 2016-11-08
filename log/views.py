@@ -23,6 +23,9 @@ import datetime
 def homepage(request):
     return render(request,"homepage.html")
 
+def contact(request):
+    return render(request,"contact.html")
+
 def user_login(request):
     username = request.POST.get('username',None)
     psswd = request.POST.get('password',None)

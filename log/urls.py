@@ -7,6 +7,7 @@ from log import views
 # We are adding a URL called /home
 urlpatterns = [
     url(r'^home$', views.home, name='home'),
+    url(r'^contact$', views.contact, name='contact'),
     url(r'^$',views.homepage, name='homepage'),
     url(r'^review$', views.review_list, name='review_list'),
     url(r'^review/(?P<review_id>[0-9]+)/$', views.review_detail, name='review_detail'),
