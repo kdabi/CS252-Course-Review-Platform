@@ -1,13 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <div class="container">
 <div class="row">
 
 <div class="jumbotron">
   <h1>Hello {{request.user.username}}</h1>
   <p>You are on your Dashboard</p>
-
+{% if course_list %}
+<h3>Select the Course :</h3>
+<form id="search">
+<select id="org" name="course_list" onChange="window.document.location.href=this.options[this.selectedIndex].value;">
+ <option  value="" selected="selected">---SELECT COURSE---</option>
+{% for course in course_list %}
+   <option value="{% url 'reviews:course_detail' course.id %}"
+       {% if course == current_course %}selected="selected"{% endif %}>
+       <h4><a href="{% url 'reviews:course_detail' course.id %}">
+        {{ course.course_id }}: {{course.course_name}}
+        </a></h4>
+   </option>
+{% endfor %}
+</select>
+</form>
+{% endif %}
 </div>
 </div>
 </div>
