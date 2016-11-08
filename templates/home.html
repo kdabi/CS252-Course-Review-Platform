@@ -7,20 +7,22 @@
 
 <div class="jumbotron">
   <h1>Hello {{request.user.username}}</h1>
-  <p>You are on your Dashboard</p>
-<h3>Your Course Reviews :</h3>
+  <p>Welcome to your Dashboard</p>
+<h3> Reviews submitted by you :</h3>
 {% if latest_review_list %}
 <div class="row" style="background-color:white">
     {% for review in latest_review_list %}
     {% ifequal review.user_name request.user.username %}
+    <center>
     <div class="col-xs-6 col-lg-4">
-        <h4><a href="{% url 'reviews:review_detail' review.id %}">
+        <h2><a href="{% url 'reviews:review_detail' review.id %}">
         {{ review.course.course_id }}
-        </a></h4>
+        </a></h2>
         <h6>Rated {{ review.rating }} of 5 by <a href="{% url 'user_detail' review.user_name %}">
             {{ review.user_name }}</a></h6>
         <p>{{ review.summary }}</p>
     </div>
+    </center>
     {% endifequal %}
     {% endfor %}
 </div>
