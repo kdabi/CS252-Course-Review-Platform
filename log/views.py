@@ -61,8 +61,14 @@ def home(request):
     return render(request,"home.html",context)
 
 @login_required(login_url="/login/")
-def review_list(request):
+def apphome(request):	
     latest_review_list = Review.objects.order_by('-pub_date')[:9]
+    context = {'latest_review_list':latest_review_list}
+    return render(request,"apphome.html",context)
+
+@login_required(login_url="/login/")
+def review_list(request):
+    latest_review_list = Review.objects.order_by('-pub_date')[:]
     context = {'latest_review_list':latest_review_list}
     return render(request, 'reviews/review_list.html', context)
 

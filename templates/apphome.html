@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<h3>Reviews</h3>
+<h3>Welcome to the Student Course Review</h3>
 {% endblock %}
 
 {% block content %}
 {% if latest_review_list %}
+<h4>Latest Reviews</h4>
 <div class="row">
     {% for review in latest_review_list %}
     <div class="col-xs-6 col-lg-4">

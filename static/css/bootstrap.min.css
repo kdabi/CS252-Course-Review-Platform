@@ -40,6 +40,12 @@ div.contacti img {
 div.contactd {
     padding: 5px;
     text-align: center;
+ div.row {
     
+    background-repeat: no-repeat;
+    background-position: right top;
+    margin-right: 200px;
+    background-attachment: fixed;
+}   
     
 }

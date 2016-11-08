@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^contact$', views.contact, name='contact'),
     url(r'^$',views.homepage, name='homepage'),
     url(r'^review$', views.review_list, name='review_list'),
+    url(r'^apphome$', views.apphome, name='apphome'),
     url(r'^review/(?P<review_id>[0-9]+)/$', views.review_detail, name='review_detail'),
     url(r'^course$', views.course_list, name='course_list'),
     url(r'^faculty$', views.faculty_list, name='faculty_list'),
