@@ -95,6 +95,13 @@ def course_detail(request, course_id):
     return render(request, 'reviews/course_detail.html', {'course': course})
 
 @login_required(login_url="/login/")
+def user_detail(request, user_name):
+    user = User.objects.get(username=user_name)
+    context = {'user': user}
+    return render(request, 'user_detail.html', context)
+
+
+@login_required(login_url="/login/")
 def add_review(request, course_id):
     course = get_object_or_404(Course, pk=course_id)
     if request.POST:
