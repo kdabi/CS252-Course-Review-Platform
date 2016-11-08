@@ -12,7 +12,8 @@
         <h4><a href="{% url 'reviews:review_detail' review.id %}">
         {{ review.course.course_id }}
         </a></h4>
-        <h6>Rated {{ review.rating }} of 5 by {{ review.user_name }}</h6>
+        <h6>Rated {{ review.rating }} of 5 by <a href="{% url 'user_detail' review.user_name %}">
+            {{ review.user_name }}</a></h6>
         <p>{{ review.summary }}</p>
     </div>
     {% endfor %}
