@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<h2><a href="{% url 'reviews:course_detail' review.course.id %}">{{ review.course.name }}</a></h2>
+<h2><a href="{% url 'reviews:course_detail' review.course.id %}">{{review.course.courseid}}{{ review.course.course_name }}</a></h2>
 {% endblock %}
 
 {% block content %}
