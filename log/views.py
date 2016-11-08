@@ -56,8 +56,8 @@ def user_login(request):
 
 @login_required(login_url="login/")
 def home(request):
-    course_list = Course.objects.order_by('course_id')
-    context = {'course_list':course_list}	
+    latest_review_list = Review.objects.order_by('-pub_date')[:]
+    context = {'latest_review_list':latest_review_list}	
     return render(request,"home.html",context)
 
 @login_required(login_url="/login/")
