@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'', include('log.urls')),
     url(r'^login/$', views.login, {'template_name': 'login.html', 'authentication_form': LoginForm}, name='login'),
+    url(r'^login_failed/$', views.login, {'template_name': 'login_failed.html', 'authentication_form': LoginForm}, name='login_failed'),
     url(r'^login1/$', user_login, name='auth'),
     url(r'^logout/$', views.logout, {'next_page': '/login'}),  
 #    url(r'^ratings/', include('ratings.urls')),

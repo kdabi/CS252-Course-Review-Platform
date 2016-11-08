@@ -44,7 +44,8 @@ def user_login(request):
     except:
         ## error if the user is not valid
         # return render( 'login.html')
-        return HttpResponseRedirect('/login/')
+        # return HttpResponseRedirect('/login/')
+        return HttpResponseRedirect('/login_failed/')
         # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
