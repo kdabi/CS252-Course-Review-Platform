@@ -12,7 +12,56 @@
 	    <title>Course Reviews</title>
 
 	    <!-- Core CSS - Include with every page -->
-	    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+	    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet"><style>
+body{ background: url(static/bac.jpg) no-repeat center fixed;
+  background-size: cover;
+}
+ul.kdlist {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 150%;
+    background-color: #f1f1f1;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+}
+
+li.kdlist a {
+    display: block;
+    color: #000;
+    padding: 40px 80px;
+    text-decoration: none;
+}
+
+li.kdlist a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+li.kdlist a:hover:not(.active) {
+    background-color: #37474f;
+    color: white;
+} 
+#org {
+    background-color: #546e7a;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+#org:hover, #org:focus {
+    background-color: #455a64;
+}
+
+#org {
+    position: relative;
+    display: inline-block;
+}
+
+</style>
 	</head>
 
 	<body>
