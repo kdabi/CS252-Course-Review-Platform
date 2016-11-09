@@ -1,11 +1,22 @@
 {% extends 'base.html' %}
+{% load user_ratings %}
 
 {% block title %}
-<h2><a href="{% url 'reviews:course_detail' review.course.id %}">{{review.course.courseid}}{{ review.course.course_name }}</a></h2>
+<!--<<<<<<< HEAD-->
+<h2><a href="{% url 'reviews:course_detail' review.course.id %}">{{ course.course_id }} : {{ course.course_name }}</a></h2>
 {% endblock %}
 
 {% block content %}
-<h4>Rated {{ review.rating }} of 5 by <a href="{% url 'user_detail' review.user_name %}" >{{ review.user_name }}</a></h4>
+
+{% user_ratings course review.rating %}
+<h4>by <a href="{% url 'user_detail' review.user_name %}" >{{ review.user_name }}</a></h4>
+<!--=======
+<h2><a href="{#% url 'reviews:course_detail' review.course.id %}">{{review.course.courseid}}{{ review.course.course_name }#}</a></h2>
+{#% endblock %#}
+
+{#% block content %#}
+<h4>Rated {#{ review.rating }} of 5 by <a href="{% url 'user_detail' review.user_name %}" >{{ review.user_name }#}</a></h4>
+>>>>>>> 781701fd9c94fe128ccac2de6ad28d2a8116f036 -->
 <p>{{ review.pub_date }}</p>
 <p>Summary : {{review.summary}}</p>
 <p>{{ review.comment }}</p>

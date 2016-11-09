@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load user_ratings %}
 {% block title %}
 <h3>Reviews</h3>
 {% endblock %}
@@ -12,8 +12,13 @@
         <h4><a href="{% url 'reviews:review_detail' review.id %}">
         {{ review.course.course_id }}
         </a></h4>
-        <h6>Rated {{ review.rating }} of 5 by <a href="{% url 'user_detail' review.user_name %}">
-            {{ review.user_name }}</a></h6>
+<!--<<<<<<< HEAD-->
+        {% user_ratings review.course review.rating %}
+        <h6> by {{ review.user_name }}</h6>
+<!--=======
+        <h6>Rated {#{ review.rating }#} of 5 by <a href="{#% url 'user_detail' review.user_name %#}">
+            {#{ review.user_name }#}</a></h6>
+>>>>>>> 781701fd9c94fe128ccac2de6ad28d2a8116f036 -->
         <p>{{ review.summary }}</p>
     </div>
     {% endfor %}

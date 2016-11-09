@@ -1,10 +1,15 @@
 {% extends 'base.html' %}
 {% load bootstrap3 %}
+{% load ratings %}
+{% load avg_ratings %}
+{% load user_ratings %}
 
 {% block title %}
 <h2>{{course.course_id}}: {{ course.course_name }}</h2>
+{% avg_ratings course %}
 <h5>{{ course.review_set.count }} reviews</h5>
-<h5>({{course.average_rating }} average rating)</h5>
+
+
 {% endblock %}
 
 {% block content %}
@@ -22,8 +27,9 @@
 <div class="row">
     {% for review in course.review_set.all %}
     <div class="col-xs-6 col-lg-4">
-        <em>{{ review.summary }}</em>
-        <h6>Rated {{ review.rating }} of 5 by <a href="{% url 'user_detail' review.user_name %}" >{{ review.user_name }}</a></h6>
+       <p><em>{{ review.summary }}</em></p>
+        {% user_ratings review.course review.rating %}
+        <h6>by <a href="{% url 'user_detail' review.user_name %}" >{{ review.user_name }}</a></h6>
         <h5><a href="{% url 'reviews:review_detail' review.id %}">
         Read more
         </a></h5>
@@ -33,6 +39,8 @@
 {% else %}
 <p>No reviews for this course yet</p>
 {% endif %}
+
+
 
 <h3>Add your review</h3>
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}

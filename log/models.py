@@ -6,6 +6,8 @@ from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 
 #from ratings.handlers import ratings
+from django.contrib.contenttypes.fields import GenericRelation
+from star_ratings.models import Rating
 
 # Create your models here.
 class Course(models.Model):
@@ -15,6 +17,7 @@ class Course(models.Model):
     course_details = models.TextField(default='Not yet decided')
     course_credit = models.CharField(max_length=100, null=True)
 #    review = models.ForeignKey(Review, on_delete=models.CASCADE)
+    ratings = GenericRelation(Rating, related_query_name='course_name')
 
     def average_rating(self):
 #        all_ratings = map(lambda x: float(x.rating), self.review_set.all())
@@ -41,7 +44,7 @@ class Review(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     pub_date = models.DateTimeField('date published')
     user_name = models.CharField(max_length=100)
-    comment = models.TextField(null=True)
+    comment = models.TextField(default='No Comments')
     summary = models.CharField(max_length=100, default='Summary')
     rating = models.IntegerField(choices=RATING_CHOICES)
 #    rating = models.ForeignKey('star_ratings.Rating')
