@@ -1,35 +1,45 @@
 {% extends 'base.html' %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+                       integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+                       crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"
+                       crossorigin="anonymous">
 
 {% block title %}
-<h3>Faculty list</h3>
+<center>
+  <h1><u>Faculty list</u></h1>
 {% endblock %}
-
+</center>
 {% block content %}
 {% if faculty_list %}
-<form id="search">
-<select id="org" name="faculty_list" onChange="window.document.location.href=this.options[this.selectedIndex].value;">
- <option  value="" selected="selected">---Search for Professors---</option>
-{% for faculty in faculty_list %}
-   <option value= {{faculty.fac_webpage}}
-       {% if faculty == current_faculty %}selected="selected"{% endif %}>
-       <h4><a href={{faculty.fac_webpage}}>
-        {{ faculty.fac_name }}
-        </a></h4>
-   </option>
-{% endfor %}
-</select>
-</form>
-<div class="row">
+<form id="search" align="right">
+  <select id="org" name="faculty_list" onChange="window.document.location.href=this.options[this.selectedIndex].value;">
+    <option  value="" selected="selected">---Search for Professors---</option>
     {% for faculty in faculty_list %}
-    <div class="col-xs-6 col-lg-4">
-        <h4><a href= {{faculty.fac_webpage}} >
+    <option value= {{faculty.fac_webpage}}
+                      {% if faculty == current_faculty %}selected="selected"{% endif %}>
+    <h4><a href={{faculty.fac_webpage}}>
         {{ faculty.fac_name }}
-        </a></h4>
-        <h5>{{ faculty.fac_id }}: {{faculty.fac_data }}</h5>
-    </div>
+      </a></h4>
+    </option>
     {% endfor %}
-</div>
+  </select>
+</form>
+<center>
+<div class="row">
+  {% for faculty in faculty_list %}
+  <section class="col-md-10 col-md-offset-1">
+    <header>
+      <h3><a href= {{faculty.fac_webpage}} > {{ faculty.fac_name }} </a></h3>
+    </header>
+
+
+    <p>{{ faculty.fac_id }}:</p><p> {{faculty.fac_data }}</p>
+
+  </section>
+  {% endfor %}
+</div></center>
 {% else %}
-    <p>No faculties are available.</p>
+<p>No faculties are available.</p>
 {% endif %}
 {% endblock %}

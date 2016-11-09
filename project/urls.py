@@ -18,5 +18,5 @@ urlpatterns = [
     url(r'^login1/$', user_login, name='auth'),
     url(r'^logout/$', views.logout, {'next_page': '/login'}),  
 #    url(r'^ratings/', include('ratings.urls')),
-#    url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
+    url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
 ]# + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
