@@ -27,6 +27,12 @@ class Course(models.Model):
     def __str__(self):
         return self.course_id + ' : ' +  self.course_name
 
+class Faculty(models.Model):
+    fac_id = models.CharField(max_length=100, null=True)
+    fac_name = models.CharField(max_length=1000, null=True)
+    fac_webpage = models.CharField(max_length=1000, default='None')
+    fac_data = models.TextField(default='Not yet decided')
+
 class Review(models.Model):
     RATING_CHOICES = (
         (1, '1'),

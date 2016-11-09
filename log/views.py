@@ -11,7 +11,7 @@ from django.contrib.auth import authenticate, login
 from pexpect import pxssh
 from django import forms
 
-from .models import Review, Course
+from .models import Review, Course, Faculty
 from .forms import ReviewForm
 from .forms import LoginForm
 
@@ -20,6 +20,11 @@ import datetime
 # Create your views here.
 # this login required decorator is to not allow to any  
 # view without authenticating
+def homepage(request):
+    return render(request,"homepage.html")
+
+def contact(request):
+    return render(request,"contact.html")
 
 def user_login(request):
     username = request.POST.get('username',None)
@@ -51,13 +56,19 @@ def user_login(request):
 
 @login_required(login_url="login/")
 def home(request):
-    course_list = Course.objects.order_by('course_id')
-    context = {'course_list':course_list}	
+    latest_review_list = Review.objects.order_by('-pub_date')[:]
+    context = {'latest_review_list':latest_review_list}	
     return render(request,"home.html",context)
 
 @login_required(login_url="/login/")
-def review_list(request):
+def apphome(request):	
     latest_review_list = Review.objects.order_by('-pub_date')[:9]
+    context = {'latest_review_list':latest_review_list}
+    return render(request,"apphome.html",context)
+
+@login_required(login_url="/login/")
+def review_list(request):
+    latest_review_list = Review.objects.order_by('-pub_date')[:]
     context = {'latest_review_list':latest_review_list}
     return render(request, 'reviews/review_list.html', context)
 
@@ -74,9 +85,22 @@ def course_list(request):
     return render(request, 'reviews/course_list.html', context)
 
 @login_required(login_url="/login/")
+def faculty_list(request):
+    faculty_list = Faculty.objects.order_by('fac_name')
+    context = {'faculty_list':faculty_list}
+    return render(request, 'reviews/faculty_list.html', context)
+
+@login_required(login_url="/login/")
 def course_detail(request, course_id):
     course = get_object_or_404(Course, pk=course_id)
     return render(request, 'reviews/course_detail.html', {'course': course})
+
+@login_required(login_url="/login/")
+def user_detail(request, user_name):
+    user = User.objects.get(username=user_name)
+    context = {'user': user}
+    return render(request, 'user_detail.html', context)
+
 
 @login_required(login_url="/login/")
 def add_review(request, course_id):

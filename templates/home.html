@@ -7,23 +7,29 @@
 
 <div class="jumbotron">
   <h1>Hello {{request.user.username}}</h1>
-  <p>You are on your Dashboard</p>
-{% if course_list %}
-<h3>Select the Course :</h3>
-<form id="search">
-<select id="org" name="course_list" onChange="window.document.location.href=this.options[this.selectedIndex].value;">
- <option  value="" selected="selected">---SELECT COURSE---</option>
-{% for course in course_list %}
-   <option value="{% url 'reviews:course_detail' course.id %}"
-       {% if course == current_course %}selected="selected"{% endif %}>
-       <h4><a href="{% url 'reviews:course_detail' course.id %}">
-        {{ course.course_id }}: {{course.course_name}}
-        </a></h4>
-   </option>
-{% endfor %}
-</select>
-</form>
+  <p>Welcome to your Dashboard</p>
+<h3> Reviews submitted by you :</h3>
+{% if latest_review_list %}
+<div class="row" style="background-color:white">
+    {% for review in latest_review_list %}
+    {% ifequal review.user_name request.user.username %}
+    <center>
+    <div class="col-xs-6 col-lg-4">
+        <h2><a href="{% url 'reviews:review_detail' review.id %}">
+        {{ review.course.course_id }}
+        </a></h2>
+        <h6>Rated {{ review.rating }} of 5 by <a href="{% url 'user_detail' review.user_name %}">
+            {{ review.user_name }}</a></h6>
+        <p>{{ review.summary }}</p>
+    </div>
+    </center>
+    {% endifequal %}
+    {% endfor %}
+</div>
+{% else %}
+<p>No reviews are available.</p>
 {% endif %}
+
 </div>
 </div>
 </div>

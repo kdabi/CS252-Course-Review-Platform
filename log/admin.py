@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Course, Review
+from .models import Course, Review, Faculty
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
@@ -20,6 +20,17 @@ class CourseResource(resources.ModelResource):
 class CourseAdmin(ImportExportModelAdmin):
     resource_class = CourseResource
 
+class FacultyResource(resources.ModelResource):
+    class Meta:
+        model = Faculty 
+        import_id_fields = ('fac_name', 'fac_data', 'fac_webpage', 'fac_id')
+        fields = ('fac_name', 'fac_data', 'fac_webpage', 'fac_id')
+
+class FacultyAdmin(ImportExportModelAdmin):
+    resource_class = FacultyResource
+
+
 #admin.site.register(Course)
 admin.site.register(Course, CourseAdmin)
 admin.site.register(Review, ReviewAdmin)
+admin.site.register(Faculty, FacultyAdmin)
